@@ -21,11 +21,11 @@ class RecordSoundsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setUIState(isRecording: false, recordingText: "Tap to Record")
+        setUIState(isRecording: false, recordingText: "Tap to Record")
     }
 
     @IBAction func recordAudio(_ sender: Any) {
-        self.setUIState(isRecording: true, recordingText: "Recording in Progress")
+        setUIState(isRecording: true, recordingText: "Recording in Progress")
         
         let dir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let recordingName = "RecordedVoice.wav"
@@ -44,7 +44,7 @@ class RecordSoundsViewController: UIViewController {
     }
     
     @IBAction func stopRecording(_ sender: Any) {
-        self.setUIState(isRecording: false, recordingText: "Tap to Record")
+        setUIState(isRecording: false, recordingText: "Tap to Record")
         
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
@@ -53,8 +53,8 @@ class RecordSoundsViewController: UIViewController {
     
     func setUIState(isRecording:Bool, recordingText:String) {
         recordingLabel.text = recordingText
-        self.stopRecordingButton.isEnabled = isRecording
-        self.recordButton.isEnabled = !isRecording
+        stopRecordingButton.isEnabled = isRecording
+        recordButton.isEnabled = !isRecording
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -81,7 +81,7 @@ extension RecordSoundsViewController: AVAudioRecorderDelegate {
             let alertAction = UIAlertAction.init(title: "Try Again", style: .default)
             alert.addAction(alertAction)
             
-            self.present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)
         }
     }
 }
